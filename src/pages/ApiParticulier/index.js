@@ -15,7 +15,7 @@ import demarches from './demarches.json';
 import Quote from '../../components/Form/components/Quote';
 
 const DemarcheDescription = () => (
-  <div className="notification grey">
+  <div style={{ color: 'red' }} className="notification grey">
     <p>
       Pour avoir accès à l’API Particulier, diffusant des données personnelles,
       vous devez obtenir un agrément. L’accès à cette API n’est pour l’instant
@@ -37,24 +37,24 @@ const DemarcheDescription = () => (
 );
 
 const contacts = {
-  metier: {
-    heading: 'Contact métier',
+  technique: {
+    heading: 'Délégué technique',
     description: (
       <p>
-        Cette personne sera contactée en cas de problème fonctionnel sur votre
-        service.
+        Cette personne recevra les accès techniques par mail pour les
+        abonnements en mode API. [À VENIR]
       </p>
     ),
     email: '',
     phone_number: '',
   },
-  technique: {
-    heading: 'Responsable technique',
+  metier: {
+    heading: "Responsable technique de l'entité",
     description: (
       <p>
-        Cette personne recevra les accès techniques par mail. Elle sera
-        contactée en cas de problème technique sur votre service. Le responsable
-        technique peut être le contact technique de votre prestataire.
+        Cette personne disposera des droits d'accès à la gestion des abonnements
+        au sein du hub d'échange de l'état. Elle sera contacté en cas de
+        problème technique.
       </p>
     ),
     email: '',
@@ -65,10 +65,14 @@ const contacts = {
 const CadreJuridiqueDescription = () => (
   <Quote>
     <p>
-      Pour pouvoir bénéficier du raccordement à l&lsquo;API Particulier, le
-      cadre légal et réglementaire des fournisseurs de service doit permettre à
-      la DINUM de transmettre des données personnelles à votre entité
-      administrative.
+      Pour pouvoir bénéficier de l'abonnement aux démarches en ligne le cadre
+      légal et réglementaire doit permettre à la DINUM de transmettre des
+      données personnelles à votre entité administrative.
+    </p>
+    <p>
+      [ajouter ici le texte de Cindy : merci de prendre connaissance, changez en
+      si vous n'êtes pas une collectivité]
+      {/*  TODO une jusitifcation par démarche */}
     </p>
   </Quote>
 );
@@ -79,52 +83,43 @@ const DonneesDescription = () => (
       La loi informatique et libertés définit les principes à respecter lors de
       la collecte, du traitement et de la conservation de données personnelles.
     </p>
-    <p>L’article 6 précise :</p>
-    <ul>
-      <li>
-        3° [les données] sont adéquates, pertinentes et non excessives au regard
-        des finalités pour lesquelles elles sont collectées et de leurs
-        traitements ultérieurs ;
-      </li>
-      <li>
-        4° Elles sont exactes, complètes et, si nécessaire, mises à jour ; les
-        mesures appropriées doivent être prises pour que les données inexactes
-        ou incomplètes au regard des finalités pour lesquelles elles sont
-        collectées ou traitées soient effacées ou rectifiées ;
-      </li>
-    </ul>
-    <p>
-      Nous vous remercions de sélectionner uniquement les données strictement
-      nécessaires à votre téléservice. Le non-respect du principe de
-      proportionnalité vous expose vis à vis de la CNIL.
-    </p>
   </Quote>
 );
 
 const availableScopes = [
   {
     value: 'dgfip_avis_imposition',
-    label: "DGFIP - Avis d'imposition",
+    label: 'CertDc - Certificat de Décès',
   },
   {
-    value: 'dgfip_adresse',
-    label: 'DGFIP - Adresse',
+    value: 'dgfip_avis_imposition',
+    label: 'AEC - Acte État Civil',
+    mandatory: true,
   },
   {
-    value: 'cnaf_quotient_familial',
-    label: 'CNAF - Quotient familial',
+    value: 'dgfip_avis_imposition',
+    label: 'RCO - Recensement Citoyen Obligatoire',
+    mandatory: true,
   },
   {
-    value: 'cnaf_allocataires',
-    label: 'CNAF - Allocataires',
+    value: 'dgfip_avis_imposition',
+    label: 'JCC - Déclaration de Changement de Coordonnées',
+    mandatory: true,
   },
   {
-    value: 'cnaf_enfants',
-    label: 'CNAF - Enfants',
+    value: 'dgfip_avis_imposition',
+    label: 'DDPACS - Dépôt de Dossier PACS',
+    mandatory: true,
   },
   {
-    value: 'cnaf_adresse',
-    label: 'CNAF - Adresse',
+    value: 'dgfip_avis_imposition',
+    label: "DOC - Déclaration d'Ouverture de Chantier",
+    mandatory: true,
+  },
+  {
+    value: 'dgfip_avis_imposition',
+    label: 'LocTo - Déclaration en mairie des location touristique',
+    mandatory: true,
   },
 ];
 
@@ -139,8 +134,8 @@ const ApiParticulier = ({
         { id: 'head', label: 'Formulaire', style: { fontWeight: 'bold' } },
         { id: 'organisation', label: 'Organisation' },
         { id: 'modeles-preremplis', label: 'Modèles pré-remplis' },
-        { id: 'description', label: 'Description' },
         { id: 'donnees', label: 'Données' },
+        { id: 'description', label: 'Description' },
         { id: 'cadre-juridique', label: 'Cadre juridique' },
         { id: 'donnees-personnelles', label: 'Données personnelles' },
         { id: 'contacts-moe', label: 'Mise en œuvre' },
@@ -158,25 +153,23 @@ const ApiParticulier = ({
       <Form
         enrollmentId={enrollmentId}
         target_api="api_particulier"
-        title="Demande d'accès à API Particulier"
+        title="Demande d'abonnement à une démarche en ligne"
         DemarcheDescription={DemarcheDescription}
         demarches={demarches}
       >
         <OrganisationSection />
-        <DemarcheSection />
-        <DescriptionSection
-          intitulePlaceholder={
-            '« Calcul du quotient familial pour la facturation scolaire et périscolaire »'
-          }
-        />
         <DonneesSection
           availableScopes={availableScopes}
           DonneesDescription={DonneesDescription}
         />
+        <DescriptionSection
+          intitulePlaceholder={
+            "« Service d'état civil », « service informatique »"
+          }
+        />
         <CadreJuridiqueSection
           CadreJuridiqueDescription={CadreJuridiqueDescription}
         />
-        <DonneesPersonnellesSection />
         <MiseEnOeuvreSection initialContacts={contacts} />
         <CguSection cguLink="https://particulier.api.gouv.fr/API_Particulier_modalites.pdf" />
       </Form>

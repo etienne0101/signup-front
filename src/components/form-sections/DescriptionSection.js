@@ -18,30 +18,17 @@ const DescriptionSection = ({
 
   return (
     <ScrollablePanel scrollableId="description">
-      <h2>Description de votre service</h2>
+      <h2>Description du(des) service(s)</h2>
       <TextInput
-        label="Nom du service"
+        label="Nom du(des) service(s)"
         helper={
           'Il doit permettre de faciliter l’identification de votre service. Cette information pouvant être rendue ' +
           'publique, il convient d’être synthétique et précis.'
         }
         meta="Cette information peut être rendue publique."
         name="intitule"
-        placeholder={intitulePlaceholder}
+        placeholder="« Service d'état civil », « service informatique »"
         value={intitule}
-        disabled={disabled}
-        onChange={onChange}
-      />
-      <TextAreaInput
-        label="Description détaillée"
-        helper={
-          descriptionHelper
-            ? descriptionHelper
-            : 'À quoi sert le service numérique qui consommera la donnée ?'
-        }
-        name="description"
-        placeholder={descriptionPlaceholder}
-        value={description}
         disabled={disabled}
         onChange={onChange}
       />

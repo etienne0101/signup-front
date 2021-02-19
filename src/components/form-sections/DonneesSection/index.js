@@ -58,7 +58,7 @@ const DonneesSection = ({
 
   return (
     <ScrollablePanel scrollableId="donnees">
-      <h2>Les données dont vous avez besoin</h2>
+      <h2>Les démarches en ligne auxquelles vous souhaitez vous abonner</h2>
       <DonneesDescription />
       <AdditionalRgpdAgreement
         disabled={disabled}
@@ -72,7 +72,7 @@ const DonneesSection = ({
         {scopesLabel
           ? scopesLabel
           : isEmpty(useCases)
-          ? 'Sélectionnez les données nécessaires à votre cas d’usage :'
+          ? 'Sélectionnez les démarches en ligne pour lesquelles vous souhaitez abonner votre service :'
           : 'Liste des données correspondantes :'}
       </p>
       {Object.keys(groupTitleScopesGroup).map(group => (

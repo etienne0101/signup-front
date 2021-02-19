@@ -195,6 +195,7 @@ const Index = () => {
       <div className="organization-subtitle">{adresse}</div>
       <div className="organization-subtitle">{ville}</div>
       <div className="organization-subtitle">SIRET : {siret}</div>
+      <div className="organization-subtitle">Code commune : 92023</div>
       <div className="organization-subtitle">
         Code NAF : {activite} {activiteLabel ? '- ' + activiteLabel : null}
       </div>

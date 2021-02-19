@@ -82,7 +82,7 @@ const Scopes = ({
                   name={`scopes.${value}`}
                   id={`checkbox-scope-${value}`}
                   disabled={disabledApplication || mandatory}
-                  checked={selectedScopes[value]}
+                  checked={false}
                 />
                 <label
                   htmlFor={`checkbox-scope-${value}`}
@@ -90,7 +90,7 @@ const Scopes = ({
                   aria-label={`Périmètre de données « ${label} »`}
                 >
                   {label}
-                  {mandatory && <i> (nécessaire)</i>}
+                  {mandatory && <i> (à venir)</i>}
                   {helper && <Helper title={helper} />}
                   {link && (
                     <>
